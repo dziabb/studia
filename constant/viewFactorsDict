@@ -1,0 +1,43 @@
+FoamFile
+{
+	version	2.0;
+	class	dictionary;
+	format	ascii;
+	location	"constant";
+	object	viewFactorsDict;
+}
+writeViewFactorMatrix	true;
+writeFacesAgglomeration	true;
+writePatchViewFactors	false;
+maxDynListLength	1000000;
+facesPerCluster	5;
+airinlet
+{
+	nFacesInCoarsestLevel	54;
+	featureAngle	20.0;
+}
+airoutlet
+{
+	nFacesInCoarsestLevel	54;
+	featureAngle	20.0;
+}
+airsymmetry
+{
+	nFacesInCoarsestLevel	1622;
+	featureAngle	20.0;
+}
+airsymmetryside
+{
+	nFacesInCoarsestLevel	5039;
+	featureAngle	20.0;
+}
+finwall
+{
+	nFacesInCoarsestLevel	4750;
+	featureAngle	20.0;
+}
+pipewall
+{
+	nFacesInCoarsestLevel	195;
+	featureAngle	20.0;
+}

@@ -1,0 +1,610 @@
+parameters
+{
+}
+run
+{
+	parallel	false;
+	processors	4;
+}
+meshing
+{
+	parallel	false;
+	processors	4;
+	meshingStages
+	{
+		Base	true;
+		Mesh	true;
+		Layers	true;
+	}
+}
+materials
+{
+	regions
+	{
+	}
+}
+inputs
+{
+	default
+	{
+	}
+}
+initialization
+{
+	potentialInit	false;
+	nNonOrthogonalCorrectors	8;
+	mapInit	false;
+	mapConsistent	false;
+}
+application
+{
+	mode	normal;
+}
+mesh
+{
+}
+summary
+{
+}
+regionProperties
+{
+	default
+	{
+		bafflesSplit	false;
+		cellZones
+		{
+		}
+	}
+}
+probes
+{
+}
+Graphics3D
+{
+	MeshParameters
+	{
+		default
+		{
+			airinlet
+			{
+				color	(155 50 0);
+				transparency	0.0;
+				faceHide	false;
+				edgesHide	false;
+			}
+			airoutlet
+			{
+				color	(155 180 50);
+				transparency	0.0;
+				faceHide	false;
+				edgesHide	false;
+			}
+			airsymmetry
+			{
+				color	(51 255 0);
+				transparency	0.0;
+				faceHide	false;
+				edgesHide	false;
+			}
+			airsymmetryside
+			{
+				color	(0 255 178);
+				transparency	0.0;
+				faceHide	false;
+				edgesHide	false;
+			}
+			finwall
+			{
+				color	(0 102 255);
+				transparency	0.0;
+				faceHide	false;
+				edgesHide	false;
+			}
+			pipewall
+			{
+				color	(128 0 255);
+				transparency	0.0;
+				faceHide	false;
+				edgesHide	false;
+			}
+		}
+	}
+	CellZonesParameters
+	{
+		air
+		{
+			faceHide	false;
+			edgesHide	false;
+		}
+	}
+	ProbeParameters
+	{
+	}
+	View
+	{
+		SavedViews
+		{
+		}
+	}
+	PostprocessingParameters
+	{
+		ActiveTime	0;
+		ActiveField	Solid;
+	}
+	GeometryParameters
+	{
+	}
+	postprocessingPlots
+	{
+		residuals
+		{
+			properties
+			{
+				title	;
+				isXGridVisible	true;
+				isYGridVisible	true;
+				xLabel	Iteration [-];
+				yLabel	Residuum [-];
+			}
+			series
+			{
+				Ux
+				{
+					label	Ux;
+					color	(0 0 255);
+					isVisible	true;
+					thickness	1;
+					representation	Solid;
+				}
+				Uy
+				{
+					label	Uy;
+					color	(255 0 0);
+					isVisible	true;
+					thickness	1;
+					representation	Solid;
+				}
+				Uz
+				{
+					label	Uz;
+					color	(0 255 0);
+					isVisible	true;
+					thickness	1;
+					representation	Solid;
+				}
+				p
+				{
+					label	p;
+					color	(0 0 0);
+					isVisible	true;
+					thickness	1;
+					representation	Solid;
+				}
+				p_rgh
+				{
+					label	p_rgh;
+					color	(0 0 0);
+					isVisible	true;
+					thickness	1;
+					representation	Solid;
+				}
+				omega
+				{
+					label	omega;
+					color	(255 200 0);
+					isVisible	true;
+					thickness	1;
+					representation	Solid;
+				}
+				epsilon
+				{
+					label	epsilon;
+					color	(255 200 0);
+					isVisible	true;
+					thickness	1;
+					representation	Solid;
+				}
+				k
+				{
+					label	k;
+					color	(0 255 255);
+					isVisible	true;
+					thickness	1;
+					representation	Solid;
+				}
+				T
+				{
+					label	T;
+					color	(255 140 0);
+					isVisible	true;
+					thickness	1;
+					representation	Solid;
+				}
+			}
+		}
+	}
+	SlicesParameters
+	{
+	}
+}
+regionInit
+{
+	patchInitializationMode	onInitialization;
+}
+slices
+{
+}
+fieldInputs
+{
+	default
+	{
+		p_rgh
+		{
+			internalField	uniform 0;
+			boundaryField
+			{
+				airinlet
+				{
+					type	fixedFluxPressure;
+				}
+				airoutlet
+				{
+					type	fixedValue;
+					value	"uniform 100000";
+				}
+				airsymmetry
+				{
+					type	symmetry;
+				}
+				airsymmetryside
+				{
+					type	symmetry;
+				}
+				finwall
+				{
+					type	zeroGradient;
+				}
+				pipewall
+				{
+					type	zeroGradient;
+				}
+			}
+		}
+		U
+		{
+			internalField	uniform (0 0 0);
+			boundaryField
+			{
+				airinlet
+				{
+					type	surfaceNormalFixedValue;
+					refValue	"uniform -10.0";
+				}
+				airoutlet
+				{
+					type	pressureInletOutletVelocity;
+					rho	rhok;
+				}
+				airsymmetry
+				{
+					type	symmetry;
+				}
+				airsymmetryside
+				{
+					type	symmetry;
+				}
+				finwall
+				{
+					type	noSlip;
+				}
+				pipewall
+				{
+					type	noSlip;
+				}
+			}
+		}
+		T
+		{
+			internalField	uniform 0.0;
+			boundaryField
+			{
+				airinlet
+				{
+					type	fixedValue;
+					value	"uniform 300";
+				}
+				airoutlet
+				{
+					type	inletOutlet;
+					inletValue	"uniform 300";
+				}
+				airsymmetry
+				{
+					type	symmetry;
+				}
+				airsymmetryside
+				{
+					type	symmetry;
+				}
+				finwall
+				{
+					type	fixedValue;
+					value	"uniform 340";
+				}
+				pipewall
+				{
+					type	fixedValue;
+					value	"uniform 340";
+				}
+			}
+		}
+		alphat
+		{
+			internalField	uniform 0;
+			boundaryField
+			{
+				airinlet
+				{
+					type	calculated;
+				}
+				airoutlet
+				{
+					type	calculated;
+				}
+				airsymmetry
+				{
+					type	symmetry;
+				}
+				airsymmetryside
+				{
+					type	symmetry;
+				}
+				finwall
+				{
+					type	alphatJayatillekeWallFunction;
+					Prt	0.7;
+				}
+				pipewall
+				{
+					type	alphatJayatillekeWallFunction;
+					Prt	0.7;
+				}
+			}
+		}
+		k
+		{
+			internalField	uniform 1e-02;
+			boundaryField
+			{
+				airinlet
+				{
+					type	turbulentIntensityKineticEnergyInlet;
+					intensity	0.05;
+				}
+				airoutlet
+				{
+					type	zeroGradient;
+				}
+				airsymmetry
+				{
+					type	symmetry;
+				}
+				airsymmetryside
+				{
+					type	symmetry;
+				}
+				finwall
+				{
+					type	kqRWallFunction;
+				}
+				pipewall
+				{
+					type	kqRWallFunction;
+				}
+			}
+		}
+		omega
+		{
+			internalField	uniform 1;
+			boundaryField
+			{
+				airinlet
+				{
+					type	turbulentMixingLengthFrequencyInlet;
+					mixingLength	1e-03;
+				}
+				airoutlet
+				{
+					type	zeroGradient;
+				}
+				airsymmetry
+				{
+					type	symmetry;
+				}
+				airsymmetryside
+				{
+					type	symmetry;
+				}
+				finwall
+				{
+					type	omegaWallFunction;
+				}
+				pipewall
+				{
+					type	omegaWallFunction;
+				}
+			}
+		}
+		nut
+		{
+			internalField	uniform 0.1;
+			boundaryField
+			{
+				airinlet
+				{
+					type	calculated;
+				}
+				airoutlet
+				{
+					type	calculated;
+				}
+				airsymmetry
+				{
+					type	symmetry;
+				}
+				airsymmetryside
+				{
+					type	symmetry;
+				}
+				finwall
+				{
+					type	nutUWallFunction;
+				}
+				pipewall
+				{
+					type	nutUWallFunction;
+				}
+			}
+		}
+	}
+}
+geometry
+{
+}
+primitiveMesh
+{
+	type	box;
+	box
+	{
+		min	(-0.5 -0.5 -0.5);
+		max	(0.5 0.5 0.5);
+		division	(10 10 10);
+		grading	(1 1 1);
+		boundaries
+		{
+			x_plus
+			{
+				name	boundaries;
+				type	patch;
+			}
+			z_plus
+			{
+				name	boundaries;
+				type	patch;
+			}
+			y_minus
+			{
+				name	boundaries;
+				type	patch;
+			}
+			z_minus
+			{
+				name	boundaries;
+				type	patch;
+			}
+			y_plus
+			{
+				name	boundaries;
+				type	patch;
+			}
+			x_minus
+			{
+				name	boundaries;
+				type	patch;
+			}
+		}
+	}
+	cylinder
+	{
+		axis	X;
+		origin	0;
+		radius	1;
+		length	1;
+		radialFraction	0.5;
+		radialDivision	10;
+		radialGrading	1;
+		axialDivision	10;
+		axialGrading	1;
+		circumferentialDivision	10;
+		boundaries
+		{
+			outlet
+			{
+				name	boundaries;
+				type	patch;
+			}
+			cylinder
+			{
+				name	boundaries;
+				type	patch;
+			}
+			inlet
+			{
+				name	boundaries;
+				type	patch;
+			}
+		}
+	}
+	plate
+	{
+		minx	-0.5;
+		miny	-0.5;
+		maxx	0.5;
+		maxy	0.5;
+		divisionx	10;
+		divisiony	10;
+		gradingx	1;
+		gradingy	1;
+		boundaries
+		{
+			x_minus
+			{
+				name	boundaries;
+				type	patch;
+			}
+			x_plus
+			{
+				name	boundaries;
+				type	patch;
+			}
+			y_plus
+			{
+				name	boundaries;
+				type	patch;
+			}
+			y_minus
+			{
+				name	boundaries;
+				type	patch;
+			}
+		}
+	}
+	wedge
+	{
+		origin	0;
+		radius	1;
+		length	1;
+		radialDivision	10;
+		radialGrading	1;
+		axialDivision	10;
+		axialGrading	1;
+		boundaries
+		{
+			cylinder
+			{
+				name	boundaries;
+				type	patch;
+			}
+			inlet
+			{
+				name	boundaries;
+				type	patch;
+			}
+			outlet
+			{
+				name	boundaries;
+				type	patch;
+			}
+		}
+	}
+}

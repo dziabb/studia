@@ -1,0 +1,47 @@
+FoamFile
+{
+	version	2.0;
+	format	ascii;
+	class	polyBoundaryMesh;
+	location	"constant/polyMesh";
+	object	boundary;
+}
+6
+(
+	airinlet
+	{
+		type	patch;
+		startFace	629026;
+		nFaces	272;
+	}
+	airoutlet
+	{
+		type	patch;
+		startFace	629298;
+		nFaces	272;
+	}
+	airsymmetry
+	{
+		type	symmetry;
+		startFace	629570;
+		nFaces	8112;
+	}
+	airsymmetryside
+	{
+		type	symmetry;
+		startFace	637682;
+		nFaces	25198;
+	}
+	finwall
+	{
+		type	wall;
+		startFace	662880;
+		nFaces	23750;
+	}
+	pipewall
+	{
+		type	wall;
+		startFace	686630;
+		nFaces	976;
+	}
+)

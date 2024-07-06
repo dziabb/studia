@@ -1,0 +1,26 @@
+FoamFile
+{
+	version	2.0;
+	class	dictionary;
+	format	ascii;
+	location	"constant";
+	object	boundaryRadiationProperties;
+}
+airinlet
+{
+}
+airoutlet
+{
+}
+airsymmetry
+{
+}
+airsymmetryside
+{
+}
+finwall
+{
+}
+pipewall
+{
+}

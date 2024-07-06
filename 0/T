@@ -1,0 +1,42 @@
+FoamFile
+{
+	version	2.0;
+	format	binary;
+	class	volScalarField;
+	location	"0";
+	object	T;
+	arch	"LSB;label=32;scalar=64";
+}
+dimensions	[0 0 0 1 0 0 0];
+internalField	uniform 0;
+boundaryField
+{
+	airinlet
+	{
+		type	fixedValue;
+		value	uniform 300;
+	}
+	airoutlet
+	{
+		type	inletOutlet;
+		inletValue	uniform 300;
+	}
+	airsymmetry
+	{
+		type	symmetry;
+	}
+	airsymmetryside
+	{
+		type	symmetry;
+	}
+	finwall
+	{
+		type	fixedValue;
+		value	uniform 340;
+	}
+	pipewall
+	{
+		type	fixedValue;
+		value	uniform 340;
+	}
+}

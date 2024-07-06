@@ -1,0 +1,213 @@
+FoamFile
+{
+	version	2.0;
+	format	binary;
+	class	dictionary;
+	location	"system";
+	object	changeDictionaryDict;
+}
+p_rgh
+{
+	boundaryField
+	{
+		airinlet
+		{
+			type	fixedFluxPressure;
+		}
+		airoutlet
+		{
+			type	fixedValue;
+			value	uniform 100000;
+		}
+		airsymmetry
+		{
+			type	symmetry;
+		}
+		airsymmetryside
+		{
+			type	symmetry;
+		}
+		finwall
+		{
+			type	zeroGradient;
+		}
+		pipewall
+		{
+			type	zeroGradient;
+		}
+	}
+}
+U
+{
+	boundaryField
+	{
+		airinlet
+		{
+			type	surfaceNormalFixedValue;
+			refValue	uniform -10;
+		}
+		airoutlet
+		{
+			type	pressureInletOutletVelocity;
+			rho	rhok;
+		}
+		airsymmetry
+		{
+			type	symmetry;
+		}
+		airsymmetryside
+		{
+			type	symmetry;
+		}
+		finwall
+		{
+			type	noSlip;
+		}
+		pipewall
+		{
+			type	noSlip;
+		}
+	}
+}
+T
+{
+	boundaryField
+	{
+		airinlet
+		{
+			type	fixedValue;
+			value	uniform 300;
+		}
+		airoutlet
+		{
+			type	inletOutlet;
+			inletValue	uniform 300;
+		}
+		airsymmetry
+		{
+			type	symmetry;
+		}
+		airsymmetryside
+		{
+			type	symmetry;
+		}
+		finwall
+		{
+			type	fixedValue;
+			value	uniform 340;
+		}
+		pipewall
+		{
+			type	fixedValue;
+			value	uniform 340;
+		}
+	}
+}
+alphat
+{
+	boundaryField
+	{
+		airsymmetry
+		{
+			type	symmetry;
+		}
+		airsymmetryside
+		{
+			type	symmetry;
+		}
+		finwall
+		{
+			type	alphatJayatillekeWallFunction;
+			Prt	0.7;
+		}
+		pipewall
+		{
+			type	alphatJayatillekeWallFunction;
+			Prt	0.7;
+		}
+	}
+}
+k
+{
+	boundaryField
+	{
+		airinlet
+		{
+			type	turbulentIntensityKineticEnergyInlet;
+			intensity	0.05;
+		}
+		airoutlet
+		{
+			type	zeroGradient;
+		}
+		airsymmetry
+		{
+			type	symmetry;
+		}
+		airsymmetryside
+		{
+			type	symmetry;
+		}
+		finwall
+		{
+			type	kqRWallFunction;
+		}
+		pipewall
+		{
+			type	kqRWallFunction;
+		}
+	}
+}
+omega
+{
+	boundaryField
+	{
+		airinlet
+		{
+			type	turbulentMixingLengthFrequencyInlet;
+			mixingLength	0.001;
+		}
+		airoutlet
+		{
+			type	zeroGradient;
+		}
+		airsymmetry
+		{
+			type	symmetry;
+		}
+		airsymmetryside
+		{
+			type	symmetry;
+		}
+		finwall
+		{
+			type	omegaWallFunction;
+		}
+		pipewall
+		{
+			type	omegaWallFunction;
+		}
+	}
+}
+nut
+{
+	boundaryField
+	{
+		airsymmetry
+		{
+			type	symmetry;
+		}
+		airsymmetryside
+		{
+			type	symmetry;
+		}
+		finwall
+		{
+			type	nutUWallFunction;
+		}
+		pipewall
+		{
+			type	nutUWallFunction;
+		}
+	}
+}
